@@ -1,0 +1,151 @@
+<div class="uk-background-secondary uk-light uk-preserve-color uk-hidden@m" uk-sticky>
+	<nav class="uk-navbar" uk-navbar>
+		<div class="uk-navbar-left">
+			<a class="uk-navbar-toggle" uk-navbar-toggle-icon uk-toggle href="#offcanvas"></a>
+		</div>
+		<div class="uk-navbar-center">
+			<a class="uk-navbar-item uk-logo" href="#">UNINET Administration</a>
+		</div>
+		<div class="uk-navbar-right">
+			<ul class="uk-navbar-nav">
+				<li>
+					<a href="#">
+						<img class="uk-border-circle" src="https://scontent.ftun12-1.fna.fbcdn.net/v/t1.0-9/19990227_1674985745874903_1545060904416431273_n.jpg?_nc_cat=106&ccb=2&_nc_sid=09cbfe&_nc_ohc=R2tv5PNjGCMAX9gSfEm&_nc_ht=scontent.ftun12-1.fna&oh=2247ca246541c5fef366f338262a7c74&oe=6003520A" width="40" height="40" alt="Jane Doe">
+					</a>
+					<div class="uk-navbar-dropdown" uk-dropdown="mode: click">
+						<ul class="uk-nav uk-navbar-dropdown-nav">
+							<li>
+								<span class="uk-text-center">Montassar Sghaier</span>
+							</li>
+							<li>
+								<a href="#"><span class="uk-margin-small-right" uk-icon="user"></span>Profile</a>
+							</li>
+							<li>
+								<a href="#"><span class="uk-margin-small-right" uk-icon="settings"></span>Settings</a>
+							</li>
+							<li>
+								<a href="#"><span class="uk-margin-small-right" uk-icon="bell"></span>Notifications<span class="notification"></span></a>
+								<div uk-dropdown="mode: click" style="min-width: 250px;max-height: 300px;overflow: auto;">
+									<p>Notification 1</p>
+									<p>Notification 1</p>
+									<p>Notification 1</p>
+									<p>Notification 1</p>
+									<p>Notification 1</p>
+									<p>Notification 1</p>
+									<p>Notification 1</p>
+									<p>Notification 1</p>
+									<p>Notification 1</p>
+									<p>Notification 1</p>
+								</div>
+								</li>
+							<li class="uk-nav-divider"></li>
+							<li>
+								<a href="#modal-center" uk-toggle><span class="uk-margin-small-right" uk-icon="sign-out"></span>Logout</a>
+								<div id="modal-center" class="uk-flex-top" uk-modal>
+									<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical" >
+										<p>Are you sure to log out ?</p>
+										<div class="uk-modal-footer">
+											<button class="uk-button uk-button-primary uk-float-right uk-modal-close">NO</button>
+											<button class="uk-button uk-button-secondary uk-float-right uk-modal-close uk-margin-small-right" (click)="authService.signOut()">YES</button>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</div>
+
+<header class="uk-background-secondary uk-navbar-container uk-navbar-transparent uk-light uk-preserve-color uk-visible@m" uk-sticky role="banner">
+	<div class="uk-container uk-container-expand">
+		<nav class="uk-navbar" uk-navbar role="navigation">
+			<div class="uk-navbar-left">
+				<a class="uk-navbar-item uk-logo uk-text-bolder" href="#">UNINET Administration</a>
+			</div>
+			<div class="uk-navbar-right">
+				<ul class="uk-navbar-nav">
+					<li>
+						<a class="uk-navbar-item" href="#">                            
+							<img class="uk-border-circle" src="https://png.pngtree.com/png-vector/20190301/ourlarge/pngtree-vector-administration-icon-png-image_747092.jpg" width="40" height="40">
+						</a>
+						<div class="uk-navbar-dropdown" uk-dropdown="mode: click">
+							<ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li>
+						            <span class="uk-text-center">Administrator</span>
+                                </li>
+								<li class="uk-nav-divider"></li>
+								<li>
+									<a href="#modal-center" uk-toggle><span class="uk-margin-small-right" uk-icon="sign-out"></span>Logout</a>
+									<div id="modal-center" class="uk-flex-top" uk-modal>
+										<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical" >
+											<p>Are you sure to log out ?</p>
+											<div class="uk-modal-footer">
+												<button class="uk-button uk-button-primary uk-float-right uk-modal-close">NO</button>
+																							<button class="uk-button uk-button-secondary uk-float-right uk-modal-close uk-margin-small-right" (click)="authService.signOut()">YES</button>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+</header>
+
+<div class="uk-flex">
+	<aside class="uk-width-medium uk-position-relative uk-visible@m" role="complementary">
+		<div class="uk-tile uk-tile-default uk-tile-small uk-width-medium uk-position-fixed uk-overflow-auto uk-box-shadow-medium" style="top: 80px; bottom: 0;">
+			<ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
+                <li>
+					<a [routerLink]="['./']"><span class="uk-margin-small-right" uk-icon="file-edit"></span>Your posts</a>
+				</li>
+				<li>
+					<a [routerLink]="['./feed-posts']"><span class="uk-margin-small-right" uk-icon="rss"></span>General posts</a>
+				</li>
+				<li class="uk-nav-header"><span class="uk-margin-small-right" uk-icon="settings"></span>Tasks</li>
+				<li><a class="uk-margin-small-left" [routerLink]="['./add-class']"><span class="uk-margin-small-right" uk-icon="plus-circle"></span>Add new class</a></li>
+				<li><a class="uk-margin-small-left" [routerLink]="['./approve-accounts']"><span class="uk-margin-small-right" uk-icon="check"></span>Approuve accounts</a></li>
+				<li><a class="uk-margin-small-left" [routerLink]="['./delete-accounts']"><span class="uk-margin-small-right" uk-icon="ban"></span>Delete accounts</a></li>
+				<li><a class="uk-margin-small-left" [routerLink]="['./reported-posts']"><span class="uk-margin-small-right" uk-icon="warning"></span>Reported posts</a></li>
+				<li class="uk-nav-header"><span class="uk-margin-small-right" uk-icon="users"></span>Groups</li>
+				<li>
+					<a [routerLink]="['./group']" class="uk-text-muted">There is no groups</a>
+				</li>
+			</ul>
+		</div>
+	</aside>
+
+	<main class="uk-section uk-section-small uk-section-muted uk-width-expand uk-margin-top-remove" role="main">
+		<div class="uk-container uk-container-expand" uk-height-viewport="expand: true">
+			<router-outlet></router-outlet>
+		</div>
+	</main>
+</div>
+
+<div id="offcanvas" uk-offcanvas="mode:push;overlay: true">
+	<div class="uk-offcanvas-bar">
+		<ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
+			<li class="uk-nav-header">Menu</li>
+			<li>
+				<a [routerLink]="['./home']"><span class="uk-margin-small-right" uk-icon="home"></span>Home</a>
+			</li>
+			<li>
+				<a href="#"><span class="uk-margin-small-right" [routerLink]="['/profile']" uk-icon="user"></span>Profile</a>
+			</li>
+			<li class="uk-nav-header"><span class="uk-margin-small-right" uk-icon="world"></span>Administration</li>
+			<li>
+				<a href="#">Special home</a>
+			</li>
+			<li class="uk-nav-header"><span class="uk-margin-small-right" uk-icon="users"></span>Groups</li>
+			<li>
+				<a href="#">Java</a>
+			</li>
+		</ul>
+	</div>
+</div>

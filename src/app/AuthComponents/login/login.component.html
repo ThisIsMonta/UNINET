@@ -1,0 +1,52 @@
+<div class="uk-section-muted uk-flex uk-flex-middle uk-animation-fade" uk-height-viewport uk-animation-fade>
+  <div class="uk-width-1-1">
+    <div class="uk-container">
+      <div class="uk-grid-margin uk-grid uk-grid-stack" uk-grid>
+        <div class="uk-width-5-6 uk-margin-auto">
+          <div
+            class="uk-card uk-box-shadow-medium uk-card-default uk-card-large uk-grid-collapse uk-child-width-1-2@s uk-margin uk-border-rounded uk-position-relative uk-overflow-hidden"
+            uk-grid>
+            <div class="uk-flex-first@s uk-card-media-right uk-cover-container">
+              <img src="../assets/login_image.jpg" alt="" uk-cover>
+              <canvas width="600" height="400"></canvas>
+            </div>
+            <div>
+              <div *ngIf="loading" class="uk-overlay-default uk-position-cover">
+                <div class="uk-position-center" uk-spinner></div>
+              </div>
+              <div class="uk-card-body">
+                <h3 class="uk-card-title uk-text-bold uk-text-uppercase uk-text-primary uk-margin-large-bottom">Login
+                </h3>
+                <form [formGroup]="loginForm" (submit)="loginUser()">
+                  <div class="uk-margin">
+                    <label class="uk-form-label" for="form-stacked-text">E-mail</label>
+                    <div class="uk-form-controls">
+                      <input class="uk-input uk-box-shadow-hover-small"
+                        [ngClass]="(email.invalid && email.touched)?'uk-form-danger':''" formControlName="email"
+                        type="text" placeholder="E-mail">
+                    </div>
+                  </div>
+                  <div class="uk-margin">
+                    <label class="uk-form-label" for="form-stacked-text">Password</label>
+                    <div class="uk-form-controls">
+                      <input class="uk-input uk-box-shadow-hover-small"
+                        [ngClass]="(password.invalid && password.touched)?'uk-form-danger':''"
+                        formControlName="password" type="password" placeholder="Password">
+                    </div>
+                  </div>
+                  <div class="uk-margin">
+                    <div class="uk-form-controls">
+                      <button class="uk-button uk-float-right uk-margin-medium-top uk-button-primary">Login</button>
+                      <div class="uk-text-small" href="">Don't you have an account ?<a [routerLink]="['../sign-up']">
+                          Sign up</a></div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<article class="uk-comment uk-margin-small-top uk-box-shadow-medium uk-padding-small">
+    <header class="uk-comment-header">
+        <div class="uk-grid-medium uk-flex-middle" uk-grid>
+            <div class="uk-width-auto">
+                <img class="uk-comment-avatar uk-border-circle" src="//placehold.it/180x180" width="40" height="40" alt="">
+            </div>
+            <div class="uk-width-expand uk-padding-remove-left uk-margin-small-left">
+                <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">{{post.user.firstname}} {{post.user.lastname}}</a><a class="uk-float-right uk-text-muted uk-text-small" uk-icon="close" (click)="removeSaved(post._id)"></a><a [routerLink]="['./post',post._id]" class="uk-float-right uk-text-muted uk-text-small uk-link">View post</a></h4>
+                <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                    <li class="uk-text-secondary text">{{post.content}}</li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <!-- <div class="uk-comment-body">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+    </div> -->
+</article>

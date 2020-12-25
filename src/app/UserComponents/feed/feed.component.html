@@ -1,0 +1,204 @@
+<div class="uk-background-primary uk-light uk-preserve-color uk-hidden@m" uk-sticky>
+	<nav class="uk-navbar" uk-navbar>
+		<div class="uk-navbar-left">
+			<a class="uk-navbar-toggle" uk-navbar-toggle-icon uk-toggle href="#offcanvas"></a>
+		</div>
+		<div class="uk-navbar-center">
+			<a class="uk-navbar-item uk-logo" href="#">UNINET</a>
+		</div>
+		<div class="uk-navbar-right">
+			<ul class="uk-navbar-nav">
+				<li>
+					<a href="#">
+						<img class="uk-border-circle"
+							[src]="user.profile.photo.length!=0?'http://a29b436625fa.ngrok.io/'+user.profile.photo[0].filename:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'"
+							width="40" height="40">
+					</a>
+					<div class="uk-navbar-dropdown" uk-dropdown="mode: click">
+						<ul class="uk-nav uk-navbar-dropdown-nav">
+							<li>
+								<span class="uk-text-center">{{user.firstname}} {{user.lastname}}</span>
+							</li>
+							<li>
+								<a href="#"><span class="uk-margin-small-right" uk-icon="user"></span>Profile</a>
+							</li>
+							<li>
+								<a href="#"><span class="uk-margin-small-right" uk-icon="settings"></span>Settings</a>
+							</li>
+							<li>
+								<a href="#"><span class="uk-margin-small-right" uk-icon="bell"></span>Notifications<span
+										class="notification"></span></a>
+								<div uk-dropdown="mode: click"
+									style="min-width: 250px;max-height: 300px;overflow: auto;">
+									<p>Notification 1</p>
+									<p>Notification 1</p>
+									<p>Notification 1</p>
+									<p>Notification 1</p>
+									<p>Notification 1</p>
+									<p>Notification 1</p>
+									<p>Notification 1</p>
+									<p>Notification 1</p>
+									<p>Notification 1</p>
+									<p>Notification 1</p>
+								</div>
+							</li>
+							<li class="uk-nav-divider"></li>
+							<li>
+								<a href="#modal-center" uk-toggle><span class="uk-margin-small-right"
+										uk-icon="sign-out"></span>Logout</a>
+								<div id="modal-center" class="uk-flex-top" uk-modal>
+									<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+										<p>Are you sure to log out ?</p>
+										<div class="uk-modal-footer">
+											<button
+												class="uk-button uk-button-primary uk-margin-small-right">NO</button>
+											<button class="uk-button uk-button-secondary uk-modal-close"
+												(click)="authService.signOut()">YES</button>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</div>
+
+<header class="uk-background-primary uk-navbar-container uk-navbar-transparent uk-light uk-preserve-color uk-visible@m"
+	uk-sticky role="banner">
+	<div class="uk-container uk-container-expand">
+		<nav class="uk-navbar" uk-navbar role="navigation">
+			<div class="uk-navbar-left">
+				<a class="uk-navbar-item uk-logo uk-text-bolder" href="#">UNINET</a>
+			</div>
+			<div class="uk-navbar-right">
+				<ul class="uk-navbar-nav">
+					<!-- <li>
+						<a class="uk-navbar-toggle" uk-search-icon href="#"></a>
+						<div class="uk-drop" uk-drop="mode: click; pos: left-center; offset: 0">
+							 <form class="uk-search uk-search-navbar uk-width-1-1" role="form">
+								  <input class="uk-search-input" type="search" placeholder="Search..." autofocus>
+							 </form>
+						</div>
+					</li> -->
+					<li class="uk-inline">
+						<a class="uk-navbar-item" (click)="readNotifications()"><span uk-icon="bell"></span><span
+								*ngIf="notification.unread>0" class="notification"></span></a>
+						<div uk-dropdown="mode: click" style="min-width: 250px;max-height: 300px;overflow: auto;">
+							<!-- <p *ngFor="let notification of "></p> -->
+							<div *ngIf="notification.events.length==0;else elseBlock">
+								<p>There is no notifications.</p>
+							</div>
+							<ng-template #elseBlock>
+								<div *ngFor="let n of notification.events">
+									<notification [notification]="n"></notification>
+								</div>
+							</ng-template>
+						</div>
+					</li>
+				</ul>
+				<ul class="uk-navbar-nav">
+					<li>
+						<a class="uk-navbar-item" href="#">
+							<img class="uk-border-circle"
+							[src]="user.profile.photo.length!=0?'http://a29b436625fa.ngrok.io/'+user.profile.photo[0].filename:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'"
+								width="40" height="40">
+						</a>
+						<div class="uk-navbar-dropdown" uk-dropdown="mode: click">
+							<ul class="uk-nav uk-navbar-dropdown-nav">
+								<li>
+									<span class="uk-text-center">{{user.firstname}} {{user.lastname}}</span>
+								</li>
+								<li>
+									<a href="#"><span class="uk-margin-small-right" uk-icon="user"></span>Profile</a>
+								</li>
+								<li class="uk-nav-divider"></li>
+								<li>
+									<a href="#modal-center" uk-toggle><span class="uk-margin-small-right"
+											uk-icon="sign-out"></span>Logout</a>
+									<div id="modal-center" class="uk-flex-top" uk-modal>
+										<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+											<p>Are you sure to log out ?</p>
+											<div class="uk-modal-footer">
+												<button
+													class="uk-button uk-button-primary uk-margin-small-right">NO</button>
+												<button class="uk-button uk-button-secondary uk-modal-close"
+													(click)="authService.signOut()">YES</button>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+</header>
+
+<div class="uk-flex">
+	<aside class="uk-width-medium uk-position-relative uk-visible@m" role="complementary">
+		<div class="uk-tile uk-tile-default uk-tile-small uk-width-medium uk-position-fixed uk-overflow-auto uk-box-shadow-medium"
+			style="top: 80px; bottom: 0;">
+			<ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
+				<li class="uk-nav-header">Menu</li>
+				<li>
+					<a [routerLink]="['./']"><span class="uk-margin-small-right" uk-icon="home"></span>Home</a>
+				</li>
+				<li>
+					<a [routerLink]="['./profile',user._id]"><span class="uk-margin-small-right"
+							uk-icon="user"></span>Profile</a>
+				</li>
+				<li class="uk-nav-header"><span class="uk-margin-small-right" uk-icon="world"></span>Administration</li>
+				<li>
+					<a [routerLink]="['./administration']">Special home</a>
+				</li>
+				<li class="uk-nav-header"><span class="uk-margin-small-right" uk-icon="users"></span>Groups</li>
+				<li *ngIf="groupList.length==0">
+					<a class="uk-text-muted" disabled>There is no groups.</a>
+				</li>
+				<div *ngIf="groupList.length!=0">
+					<li *ngFor="let group of groupList">
+						<a class="uk-link-heading" [routerLink]="['./group',group._id]">{{group.name}}</a>
+					</li>
+				</div>
+				<li>
+					<a [routerLink]="['./add-group']" *ngIf="user.role=='Teacher'">Add new group <span
+							uk-icon="plus-circle"></span></a>
+				</li>
+			</ul>
+		</div>
+	</aside>
+
+	<main class="uk-section uk-section-small uk-section-muted uk-width-expand uk-margin-top-remove" role="main">
+		<div class="uk-container uk-container-expand" uk-height-viewport="expand: true">
+			<router-outlet></router-outlet>
+		</div>
+	</main>
+</div>
+
+<div id="offcanvas" uk-offcanvas="mode:push;overlay: true">
+	<div class="uk-offcanvas-bar">
+		<ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
+			<li class="uk-nav-header">Menu</li>
+			<li>
+				<a [routerLink]="['./']"><span class="uk-margin-small-right" uk-icon="home"></span>Home</a>
+			</li>
+			<li>
+				<a [routerLink]="['./profile',user._id]"><span class="uk-margin-small-right"
+						uk-icon="user"></span>Profile</a>
+			</li>
+			<li class="uk-nav-header"><span class="uk-margin-small-right" uk-icon="world"></span>Administration</li>
+			<li>
+				<a [routerLink]="['./administration']">Special home</a>
+			</li>
+			<li class="uk-nav-header"><span class="uk-margin-small-right" uk-icon="users"></span>Groups</li>
+			<li>
+				<a [routerLink]="['./group']" class="uk-text-muted" disabled>There is no groups.</a>
+			</li>
+		</ul>
+	</div>
+</div>

@@ -1,0 +1,14 @@
+.uk-comment{
+    /* background: linear-gradient(90deg, rgba(238,238,238,1) 0%, rgba(165,250,254,1) 100%); */
+background-color: #eee;
+    /* background: linear-gradient(90deg, rgb(206, 206, 206) 0%, rgb(154, 206, 230) 100%); */
+    border-radius: 5px;
+}
+.preview-img{
+    width: 100px;
+    height: 100px;
+    object-fit:scale-down;
+}
+.white span{
+    color: white;
+}

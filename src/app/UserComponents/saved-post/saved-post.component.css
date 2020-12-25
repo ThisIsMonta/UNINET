@@ -1,0 +1,11 @@
+.uk-comment{
+    background-color: #eee;
+    border-radius: 5px;
+}
+.text{
+    /* text-overflow: ellipsis; */
+    display: inline-block;
+    overflow: hidden !important; 
+    width: 90%; 
+    white-space: nowrap;
+}

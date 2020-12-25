@@ -1,0 +1,16 @@
+.uk-input{
+    background-color: #eee;
+}
+button{
+    border-radius: 35px;
+}
+button:hover{
+    background-color: rgb(0, 173, 173);
+    border-radius: 35px;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}

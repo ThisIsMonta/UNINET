@@ -1,0 +1,18 @@
+.uk-comment{
+    color: black;
+    background: linear-gradient(127deg,rgba(228, 228, 228, 0.657) 0%, rgb(144, 178, 194) 100%);
+    border-radius: 5px;
+}
+.preview-img{
+    width: 100px;
+    height: 100px;
+    object-fit:scale-down;
+}
+.white span{
+    color: white;
+}
+
+.uk-button{
+    background: transparent;
+    color: black;
+}

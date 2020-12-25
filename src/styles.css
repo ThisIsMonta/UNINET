@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #bbb; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #aaa; 
+  }
+
+
+  .uk-notification-message{
+    -webkit-box-shadow: 2px 6px 33px -1px rgba(145, 143, 145, 0.575);
+    -moz-box-shadow: 2px 6px 33px -1px rgba(145,143,145,0.575);
+    box-shadow: 2px 6px 33px -1px rgba(145,143,145,0.575);
+    border-radius: 5px;
+    font-size: 15px;
+  }

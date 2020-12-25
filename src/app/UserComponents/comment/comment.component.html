@@ -1,0 +1,15 @@
+<article class="uk-comment uk-comment-primary uk-margin-small-top">
+    <header class="uk-comment-header">
+        <div class="uk-grid-medium uk-flex-middle" uk-grid>
+            <div class="uk-width-auto">
+                <img class="uk-comment-avatar uk-border-circle" [src]="data.user.profile.photo?data.user.profile.photo.pathname:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'" width="40" height="40" alt="">
+            </div>
+            <div class="uk-width-expand">
+                <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset">{{data.user.firstname}} {{data.user.lastname}}</a><span uk-tooltip="Delete your comment" class="uk-float-right delete-button" *ngIf="commentIsMine" (click)="deleteComment(data._id)" uk-icon="close"></span><span class="uk-text-muted uk-text-small uk-float-right">{{date(data.createdAt)}}</span></h4>
+            </div>
+        </div>
+    </header>
+    <div class="uk-comment-body">
+        <p>{{data.content}}</p>
+    </div>
+</article>

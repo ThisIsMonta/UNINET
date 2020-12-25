@@ -62,7 +62,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "uninet:build"
+            "browserTarget": "uninet:build",
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -119,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "uninet"
+    }
+  },
+  "defaultProject": "uninet",
+  "cli": {
+    "analytics": false
+  }
 }

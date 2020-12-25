@@ -1,0 +1,14 @@
+.btn{
+    border-radius: 25px;
+}
+.approve{
+    background-color: rgb(94, 156, 1);
+    color: white;
+}
+.reject{
+    background-color: rgb(255, 0, 0);
+    color: white;
+}
+.ng-option{
+    background-color: white;
+}

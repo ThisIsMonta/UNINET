@@ -1,0 +1,57 @@
+<div class="uk-child-width-1-1 uk-child-width-1-2@m uk-child-width-1-3@l" uk-grid>
+    <div class="uk-width-1-2@xl uk-position-relative">
+        <div class="uk-card uk-card-default">
+            <div class="uk-card-body">
+                <h3>Profile :</h3>
+                <form [formGroup]="editProfileForm" (submit)="editProfile()">
+                    <div class="uk-text-left" uk-grid>
+                        <div class="uk-width-auto@m uk-flex uk-flex-column">
+                            <img *ngIf="!hasNoImage" [src]="profileImageURL" class="uk-border-circle profile-image uk-text-center" alt="">
+                            <div *ngIf="hasNoImage" class="container">
+                                <input class="input" type="file" id="fileDropRef" formControlName="profileImage" accept="image/*" (change)="uploadProfileImage($event)"/>
+                                <h5>Drag and drop your image here,</h5>
+                                <label for="fileDropRef">Browse your files</label>
+                            </div>
+                            <a *ngIf="!hasNoImage" class="uk-margin-small-top uk-text-center" (click)="removeProfileImage()" uk-tooltip="Remove this image." uk-icon="close"></a>
+                        </div>
+                        <div class="uk-width-expand@m">
+                            <div class="">
+                                <h4 class="uk-text-normal uk-margin">Firstname : <span class="uk-text-light">
+                                    <div class="uk-margin">
+                                        <input class="uk-input" formControlName="firstname" type="text" placeholder="fullname">
+                                    </div>
+                                </span></h4>
+                                <h4 class="uk-text-normal uk-margin">Lastname : <span class="uk-text-light">
+                                    <div class="uk-margin">
+                                        <input class="uk-input" formControlName="lastname" type="text" placeholder="fullname">
+                                    </div>
+                                </span></h4>
+                                <h4 class="uk-text-normal uk-margin">Date of birth : <span class="uk-text-light">
+                                    <div class="uk-margin">
+                                        <input type="date" class="uk-input" formControlName="dateOfBirth"  placeholder="fullname">
+                                    </div>
+                                </span></h4>
+                                <h4 class="uk-text-normal uk-margin">Bio : <span class="uk-text-light">
+                                    <div class="uk-margin">
+                                        <textarea class="uk-textarea" formControlName="bio"  placeholder="Write something about yourself..."></textarea>
+                                    </div>
+                                </span></h4>
+                                <h4 class="uk-text-normal uk-margin">Department : <span class="uk-text-light" uk-tooltip="You cannot change your department">TI</span></h4>
+                                <h4 class="uk-text-normal uk-margin">Role : <span class="uk-text-light" uk-tooltip="You cannot change your role">Student</span></h4>
+                                <h4 class="uk-text-normal uk-margin">Class : <span class="uk-text-light" uk-tooltip="You cannot change your class">DSI31</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="uk-button uk-button-primary uk-float-right" type="submit">edit</button>
+                </form>
+            </div>
+            <div class="uk-card-footer">
+                <h3>Groups</h3>
+                <a href=""><span class="uk-badge uk-padding-small uk-margin-small-left" uk-tooltip="You cannot delete this group">Java</span></a>
+                <a href=""><span class="uk-badge uk-padding-small uk-margin-small-left" uk-tooltip="You cannot delete this group">UML</span></a>
+                <a href=""><span class="uk-badge uk-padding-small uk-margin-small-left" uk-tooltip="You cannot delete this group">Node.js</span></a>
+                <a href=""><span class="uk-badge uk-padding-small uk-margin-small-left" uk-tooltip="You cannot delete this group">SOA</span></a>
+            </div>
+        </div>
+    </div>
+</div>

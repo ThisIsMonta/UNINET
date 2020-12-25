@@ -1,0 +1,54 @@
+<article *ngIf="post" class="uk-comment uk-margin-small-top uk-box-shadow-medium uk-padding uk-comment-primary">
+    <header class="uk-comment-header">
+        <div class="uk-grid-medium uk-flex-middle" uk-grid>
+            <div class="uk-width-auto">
+                <img class="uk-comment-avatar uk-border-circle" src="//placehold.it/150x150" width="50" height="50"
+                    alt="">
+            </div>
+            <div class="uk-width-expand">
+                <h4 class="uk-comment-title uk-margin-remove">
+                    <a class="uk-link-reset" [routerLink]="['/home/profile',post.user._id]">{{post.user.firstname}}
+                        {{post.user.lastname}}</a>
+                    <a class="uk-link-reset uk-float-right">
+                        <a href="#" class="uk-icon-link uk-margin-small-right" uk-icon="more-vertical"></a>
+                        <div uk-dropdown="mode:click">
+                            <ul class="uk-nav uk-dropdown-nav">
+                                <li>
+                                    <a (click)="savePost()"><span class="uk-margin-small-right" uk-icon="bookmark"></span>Save</a>
+                                </li>
+                                <li>
+                                    <a (click)="reportPost()"><span class="uk-margin-small-right" uk-icon="warning"></span>Report</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </a>
+                </h4>
+                <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                    <li><a class="uk-text-muted">{{date(post.createdAt)}}</a></li>
+                    <li><a class="uk-text-primary" *ngIf="!isAdmin" [routerLink]="['./post',post._id]">View Post</a></li>
+                    <li><a class="uk-text-primary" *ngIf="isAdmin" [routerLink]="['../post',post._id]">View Post</a></li>
+                    <li>
+                        <button class="uk-button uk-padding-remove upvote" [ngClass]="{'uk-text-primary':upvoted}"
+                            (click)="upvote()"><span
+                                uk-icon="icon: arrow-up; ratio: 1.25"></span>{{upvotesCount}}</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div class="uk-comment-body">
+        <p>{{post.content}}</p>
+        <div class="">
+            <div uk-lightbox>
+                <a *ngFor="let image of post.media" [href]="'http://a29b436625fa.ngrok.io/'+image.filename">
+                    <div class="uk-inline-clip uk-transition-toggle" tabindex="0">
+                        <img class="preview-img" [src]="'http://a29b436625fa.ngrok.io/'+image.filename" alt="">
+                        <div class="uk-position-center white">
+                            <span class="uk-transition-fade uk-text-small uk-text-bolder">View <br> image</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</article>

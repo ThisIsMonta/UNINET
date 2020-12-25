@@ -1,0 +1,18 @@
+.uk-comment{
+    background: rgb(160,213,211);
+background: linear-gradient(328deg, rgba(160,213,211,1) 0%, rgba(158,203,194,1) 100%);
+
+    /* background-color: #eee; */
+    border-radius: 5px;
+}
+.preview-img{
+    width: 100px;
+    height: 100px;
+    object-fit:scale-down;
+}
+.white span{
+    color: white;
+}
+.upvote{
+    background-color: transparent
+}

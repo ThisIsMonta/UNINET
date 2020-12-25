@@ -1,0 +1,34 @@
+<article *ngIf="!isDeleted" class="uk-comment uk-margin-small-top uk-box-shadow-medium uk-padding uk-comment-primary">
+    <header class="uk-comment-header">
+        <div class="uk-grid-medium uk-flex-middle" uk-grid>
+            <div class="uk-width-expand">
+                <h4 class="uk-comment-title uk-margin-remove">
+                    <a class="uk-link-reset uk-text-middle"><span uk-icon="world"></span> UNINET <span class="uk-text-meta uk-text-small">{{date(post.createdAt)}}</span><button class="uk-button uk-padding-remove" [ngClass]="{'uk-text-primary':upvoted}" (click)="upvote()"><span uk-icon="icon: arrow-up; ratio: 1.25"></span>{{upvotesCount}}</button></a>
+                    <a class="uk-link-reset uk-float-right">
+                        <button class="uk-button uk-padding-remove" *ngIf="!isAdmin" [ngClass]="{'uk-text-primary':saved}" (click)="savePost()"><span uk-icon="icon: bookmark; ratio: 1.25"></span></button>
+                        <button class="uk-button uk-padding-remove" *ngIf="isAdmin" (click)="deletePost(post._id)"><span uk-icon="icon: trash; ratio: 1.25"></span></button>
+                    </a>
+                    <a class="uk-float-right">
+                        <a *ngIf="isAdmin" class="uk-padding-remove uk-text-small uk-text-middle uk-margin-small-right" [routerLink]="['./post',post._id]">View post</a>
+                        <a *ngIf="!isAdmin" class="uk-padding-remove uk-text-small uk-text-middle uk-margin-small-right" [routerLink]="['../post',post._id]">View post</a>
+                    </a>
+                </h4>
+            </div>
+        </div>
+    </header>
+    <div class="uk-comment-body">
+        <p>{{post.content}}</p>
+        <div class="">
+            <div uk-lightbox>
+                <a *ngFor="let image of post.media" [href]="'http://a29b436625fa.ngrok.io/'+image.filename">
+                    <div class="uk-inline-clip uk-transition-toggle" tabindex="0">
+                        <img class="preview-img" [src]="'http://a29b436625fa.ngrok.io/'+image.filename" alt="">
+                        <div class="uk-position-center white">
+                            <span class="uk-transition-fade uk-text-small uk-text-bolder">View <br> image</span>
+                        </div>
+                    </div>
+                </a>                
+            </div>
+        </div>
+    </div>
+</article>
