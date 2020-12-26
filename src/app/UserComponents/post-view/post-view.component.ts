@@ -32,6 +32,7 @@ export class PostViewComponent implements OnInit {
         this.isAdmin = JSON.parse(sessionStorage.getItem('user')).role=="Admin";
         this.upvoted = this.isUpvoted();
         this.comments = this.post.comments;
+        console.log("comments are ",this.comments);
         console.log(this.post);
         this.loaded = true;
       })
