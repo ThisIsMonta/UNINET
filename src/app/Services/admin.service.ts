@@ -17,11 +17,23 @@ export class AdminService {
   }
 
   groups(){
-    return this.http.sendGetRequest("/group");
+    return this.http.sendGetRequest("/group");  
   }
 
+  allGroups(){
+    return this.http.sendGetRequest("/group/all");  
+  }
+  
   getGroup(id){
     return this.http.sendGetRequest(`/group/${id}`);
+  }
+
+  getReportedPosts(){
+    return this.http.sendGetRequest("/timeline/reported");
+  }
+
+  ignoreReportedPost(id){
+    return this.http.sendPostRequest(`/post/${id}/ignore`,{});
   }
 
   getPendingUsers(){

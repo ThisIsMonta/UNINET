@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from 'src/app/Services/admin.service';
 import { HttpService } from 'src/app/Services/http.service';
+import { UserService } from 'src/app/Services/user.service';
 declare var UIkit:any;
 
 @Component({
@@ -14,7 +15,8 @@ export class AddGroupComponent implements OnInit {
   newGroupForm:FormGroup
   classesList:any = [];
   groupList:any = [];
-  constructor(private fb:FormBuilder,private adminService:AdminService,private http:HttpService) { }
+  loading:boolean = true;
+  constructor(private fb:FormBuilder,private adminService:AdminService,private userService:UserService,private http:HttpService) { }
 
   ngOnInit(): void {
     this.getClasses();
@@ -49,22 +51,26 @@ export class AddGroupComponent implements OnInit {
 
   getClasses(){
     this.adminService.classes().subscribe((classes:any)=>{
-      this.classesList = classes.populated;
+      this.classesList = classes;
       console.log(this.classesList);
     });
   }
 
   getGroups(){
+    
     this.adminService.groups().subscribe((groups:any)=>{
       this.groupList = groups.populated;
+      this.userService.eventEmit.emit("GroupChange",this.groupList)
       console.log(this.groupList);
+    },()=>{},()=>{
+      this.loading = false;
     });
   }
 
   deleteGroup(id,groupname){
     this.http.sendDeleteRequest(`/group/${id}`).subscribe((r)=>{
       console.log(r);
-      UIkit.notification({message: `Group ${groupname} has been deleted`});
+      UIkit.notification({message: `Group ${groupname} has been deleted`,status:'success'});
       this.getClasses();
       this.getGroups();
     })

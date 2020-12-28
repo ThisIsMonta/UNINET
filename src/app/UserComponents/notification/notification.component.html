@@ -1,3 +1,5 @@
-<div class="uk-width-1-1">
-    <p>{{notification.user}} has {{notification.message}} on {{notification.post}}</p>
+<div class="uk-width-1-1 uk-margin-small-bottom">    
+    <a class="uk-link-reset" [routerLink]="['/home/post',notification.post]" uk-tooltip="title:View post;pos: left">
+        <b>{{notification.user.firstname}} {{notification.user.lastname}}</b> has {{notification.message}} 
+    </a>
 </div>

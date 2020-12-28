@@ -15,17 +15,17 @@
                         </span> 
                         <span class="uk-text-meta uk-text-small"> {{date(post.createdAt)}}</span></a>
                         <a class="uk-link-reset uk-float-right">
-                            <button class="uk-button uk-padding-remove" *ngIf="!isAdmin" [ngClass]="{'uk-text-primary':saved}"
+                            <button class="uk-button uk-padding-remove transparent" *ngIf="!isAdmin" [ngClass]="{'uk-text-primary':saved}"
                             (click)="savePost()"><span uk-icon="icon: bookmark; ratio: 1.25"></span></button>
                         </a>
-                        <button class="uk-button uk-padding-remove uk-float-right uk-margin-small-right" [ngClass]="{'uk-text-primary':upvoted}" (click)="upvote()"><span uk-icon="icon: arrow-up; ratio: 1.25"></span>{{upvotesCount}}</button>
+                        <button class="uk-button uk-padding-remove uk-float-right uk-margin-small-right transparent" [ngClass]="{'uk-text-primary':upvoted}" (click)="upvote()"><span uk-icon="icon: arrow-up; ratio: 1.25"></span>{{upvotesCount}}</button>
             </h4>
             <p>{{post.content}}</p>
             <div class="">
                 <div uk-lightbox>
-                    <a *ngFor="let image of post.media" [href]="'http://a29b436625fa.ngrok.io/'+image.filename">
+                    <a *ngFor="let image of post.media" [href]="userService.host+'/'+image.filename">
                         <div class="uk-inline-clip uk-transition-toggle" tabindex="0">
-                            <img class="preview-img" [src]="'http://a29b436625fa.ngrok.io/'+image.filename" alt="">
+                            <img class="preview-img" [src]="userService.host+'/'+image.filename" alt="">
                             <div class="uk-position-center white">
                                 <span class="uk-transition-fade uk-text-small uk-text-bolder">View <br> image</span>
                             </div>
@@ -40,21 +40,21 @@
                     <div class="uk-width-expand@m">
                             <fieldset class="uk-fieldset">
                                 <div class="uk-margin">
-                                    <input class="uk-input" type="text" formControlName="comment" placeholder="Write your comment...">
+                                    <input class="uk-input" [ngClass]="(comment.invalid && comment.touched )?'uk-form-danger':''" type="text" formControlName="comment" placeholder="Write your comment...">
                                 </div>
                             </fieldset>
                         </div>
                         <div class="uk-width-auto@m">
-                            <button class="uk-button uk-button-muted uk-button-small" type="submit"><span uk-icon="commenting"></span> comment</button>
+                            <button class="uk-button uk-button-primary" type="submit"><span uk-icon="commenting"></span> comment</button>
                         </div>
                     </div>               
                 </div>
             </form>
             <ul uk-accordion *ngIf="comments.length!=0">
-                <li>
+                <li class="uk-open">
                     <a class="uk-accordion-title" href="#">{{comments.length}} Comments</a>
-                    <div class="uk-accordion-content" *ngFor="let comment of comments">
-                        <comment [data]="comment"></comment>
+                    <div class="uk-accordion-content" >
+                        <comment *ngFor="let comment of comments" [post]="post" [data]="comment"></comment>
                     </div>
                 </li>
             </ul>

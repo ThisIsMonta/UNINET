@@ -1,4 +1,4 @@
-.uk-search{
+/* .uk-search{
     border-radius: 25px;
     color: black;
     background-color: #eee;    
@@ -11,13 +11,23 @@
 }
 .uk-search-input::-webkit-input-placeholder { 
     color: black; 
-}
-
+} */
 .notification{
     width: 10px;
     height: 10px;
     border-radius: 50%;
     background-color: red;
+}
+
+.profile-image{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.uk-modal-body {
+    width: 300px;
+    border-radius: 5px;
 }
 
 

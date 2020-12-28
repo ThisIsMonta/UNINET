@@ -1,4 +1,7 @@
 .profile-image{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
     box-shadow: 0.25px 0 15px rgba(35, 109, 182, 0.514);
 }
 .container {

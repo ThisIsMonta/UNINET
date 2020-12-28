@@ -25,14 +25,15 @@
         </div>
     </div>
     <div class="uk-width-1-2@xl uk-position-relative">
-        <div class="uk-card uk-card-default uk-card-body">
+        <div *ngIf="loading" class="uk-card uk-card-default uk-card-body uk-text-center" uk-spinner></div>
+        <div *ngIf="!loading" class="uk-card uk-card-default uk-card-body">
             <h3>Groups list :</h3>
                 <ul *ngIf="groupList.length!=0;else noGroups" uk-accordion="multiple: true">
                     <li>
-                        <a class="uk-accordion-title">Groups</a>
+                        <a class="uk-accordion-title">{{groupList.length}} Groups</a>
                         <div class="uk-accordion-content">
-                            <p *ngFor="let group of groupList;let i=index;"><span class="uk-margin-small-right"
-                                (click)="deleteGroup(group._id,group.name)" uk-icon="close"></span>{{group.name}} - {{group.class.name}}</p>
+                            <p *ngFor="let group of groupList;let i=index;"><span class="delete-icon uk-margin-small-right"
+                                (click)="deleteGroup(group._id,group.name)" uk-icon="close" uk-tooltip="Delete this group"></span>{{group.name}} - {{group.class.name}}</p>
                         </div>
                     </li>
                 </ul>

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { UserService } from 'src/app/Services/user.service';
 
 @Component({
   selector: 'group-user',
@@ -9,7 +10,7 @@ export class GroupUserComponent implements OnInit {
 
   @Input('user') user:any
 
-  constructor() { }
+  constructor(public userService:UserService) { }
 
   ngOnInit(): void {
   }

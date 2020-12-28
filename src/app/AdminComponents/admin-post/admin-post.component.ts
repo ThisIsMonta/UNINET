@@ -18,7 +18,7 @@ export class AdminPostComponent implements OnInit {
   upvoted: boolean;
   saved: boolean = false;
   isDeleted : boolean = false;
-  constructor(private userService:UserService) { }
+  constructor(public userService:UserService) { }
 
   ngOnInit(): void {
     this.upvotesCount = this.post.upvotes.length;

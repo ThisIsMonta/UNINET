@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from 'src/app/Services/admin.service';
 import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
@@ -8,9 +9,15 @@ import { AuthService } from 'src/app/Services/auth.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public authService:AuthService) { }
+  groupList:any=[];
+
+  constructor(public authService:AuthService,public adminService:AdminService) { }
 
   ngOnInit(): void {
+    this.adminService.allGroups().subscribe((res)=>{
+      this.groupList = res;
+      console.log(res);
+    })
   }
 
 }

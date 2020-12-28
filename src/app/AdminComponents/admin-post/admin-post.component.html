@@ -20,9 +20,9 @@
         <p>{{post.content}}</p>
         <div class="">
             <div uk-lightbox>
-                <a *ngFor="let image of post.media" [href]="'http://a29b436625fa.ngrok.io/'+image.filename">
+                <a *ngFor="let image of post.media" [href]="userService.host+'/'+image.filename">
                     <div class="uk-inline-clip uk-transition-toggle" tabindex="0">
-                        <img class="preview-img" [src]="'http://a29b436625fa.ngrok.io/'+image.filename" alt="">
+                        <img class="preview-img" [src]="userService.host+'/'+image.filename" alt="">
                         <div class="uk-position-center white">
                             <span class="uk-transition-fade uk-text-small uk-text-bolder">View <br> image</span>
                         </div>

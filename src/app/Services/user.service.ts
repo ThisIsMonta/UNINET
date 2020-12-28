@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import * as io from 'socket.io-client';
+import { EventEmitter } from 'events';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   public socket: any;
+  public host = "http://a29b436625fa.ngrok.io";
 
-  constructor(private http:HttpService) {}
+  public eventEmit = new EventEmitter();
 
-  initSocket(){
-    this.socket = io.connect('http://a29b436625fa.ngrok.io',{query:{token:localStorage.getItem('token')}});
+  constructor(private http:HttpService) {
+    this.initSocket();
+  }
+
+  initSocket(){ 
+    this.socket = io.connect(this.host,{query:{token:localStorage.getItem('token')}});
   }
 
   editProfile(data){
@@ -62,16 +68,16 @@ export class UserService {
     return this.http.sendPostRequest(`/save/${id}`,{});
   }
 
-  report(){
-    console.log("post reported");
+  report(id){
+    return this.http.sendPostRequest(`/post/${id}/report`,{});
   }
 
   comment(id,data){
     return this.http.sendPostRequest(`/post/${id}/comment`,data);
   }
 
-  deleteComment(id){
-    return this.http.sendDeleteRequest(`/post/comment/${id}`);
+  deleteComment(postId,id){
+    return this.http.sendDeleteRequest(`/post/${postId}/comment/${id}`);
   }
 
   isMine(id){

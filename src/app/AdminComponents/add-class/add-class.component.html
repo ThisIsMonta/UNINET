@@ -32,8 +32,8 @@
                     <li *ngFor="let class of classesList;let i=index;">
                         <a class="uk-accordion-title"><span class="uk-margin-small-right"
                                 (click)="deleteClass(class._id,class.name)" uk-icon="close"></span>{{class.name}}</a>
-                        <div class="uk-accordion-content" *ngFor="let student of class.students">
-                            <group-user [user]="student"></group-user>
+                        <div class="uk-accordion-content">
+                            <group-user *ngFor="let student of class.students" [user]="student"></group-user>
                         </div>
                     </li>
                 </ul>

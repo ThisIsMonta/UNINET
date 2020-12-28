@@ -1,4 +1,4 @@
-<div class="uk-alert-primary" uk-alert>
+<div class="uk-alert-primary" uk-alert *ngIf="user.role!='Admin' && !user.profile.seted">
     <a class="uk-alert-close" uk-close></a>
     <p>You have to setup your profile,<a class="uk-link" [routerLink]="['./edit-profile']"> Edit it profile</a></p>
 </div>

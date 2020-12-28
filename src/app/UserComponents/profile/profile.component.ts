@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AdminService } from 'src/app/Services/admin.service';
 import { UserService } from 'src/app/Services/user.service';
 
 @Component({
@@ -23,18 +25,34 @@ export class ProfileComponent implements OnInit {
   file: any;
   imageUrl: string | ArrayBuffer;
   formData = new FormData;
-  constructor(private route:ActivatedRoute,private fb:FormBuilder,private userService:UserService) {
+  groups: any = [];
+
+  constructor(private route:ActivatedRoute,private fb:FormBuilder,public adminService:AdminService,public userService:UserService) {
     this.route.params.subscribe((params)=>{
       console.log(params);
-      this.userService.getProfile(params.id).subscribe((res)=>{
+      this.userService.getProfile(params.id).subscribe((res:any)=>{
         this.user = res;
         this.profileIsMine = this.userService.isMine(this.user._id)
         console.log(this.profileIsMine);
-        this.loaded = true;
         console.log(res);
+        if (this.user.role=="Teacher") {
+          this.adminService.groups().subscribe((res:any)=>{
+            this.groups = res.populated;
+            console.log(res.populated);
+          })
+        }else{
+          this.adminService.getClass(this.user.class._id).subscribe((res:any)=>{
+            this.groups = res.populated.groups;
+            console.log(res.populated);
+          })
+        }
+      },()=>{},()=>{
+        this.loaded = true;
       })
    })
   }
+
+
 
   ngOnInit(): void {
     this.postForm = this.fb.group({

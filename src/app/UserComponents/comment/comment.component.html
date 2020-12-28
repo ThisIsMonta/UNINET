@@ -1,11 +1,17 @@
-<article class="uk-comment uk-comment-primary uk-margin-small-top">
+<article *ngIf="data!=null" class="uk-comment uk-comment-primary uk-margin-small-top">
     <header class="uk-comment-header">
         <div class="uk-grid-medium uk-flex-middle" uk-grid>
-            <div class="uk-width-auto">
-                <img class="uk-comment-avatar uk-border-circle" [src]="data.user.profile.photo.length!=0?'http://a29b436625fa.ngrok.io/'+data.user.profile.photo[0].filename:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'" width="40" height="40" alt="">
+            <div class="uk-width-auto" *ngIf="!isAdmin">
+                <img  class="uk-comment-avatar uk-border-circle" 
+                     [src]="data.user.profile.photo.length!=0?userService.host+'/'+data.user.profile.photo[0].filename:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'" alt="">
             </div>
             <div class="uk-width-expand">
-                <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset">{{data.user.firstname}} {{data.user.lastname}}</a><span uk-tooltip="Delete your comment" class="uk-float-right delete-button" *ngIf="commentIsMine" (click)="deleteComment(data._id)" uk-icon="close"></span><span class="uk-text-muted uk-text-small uk-float-right">{{date(data.createdAt)}}</span></h4>
+                <h4 class="uk-comment-title uk-margin-remove">
+                    <a class="uk-link-reset" *ngIf="!isAdmin" [routerLink]="['/home/profile',data.user._id]">{{data.user.firstname}} {{data.user.lastname}}</a>
+                    <a class="uk-link-reset" *ngIf="isAdmin"><span uk-icon="world"></span> UNINET</a>
+                    <span uk-tooltip="Delete your comment" class="uk-float-right delete-button" *ngIf="commentIsMine" (click)="deleteComment(post._id,data._id)" uk-icon="close"></span>
+                    <span class="uk-text-muted uk-text-small uk-float-right">{{date(data.createdAt)}}</span>
+                </h4>
             </div>
         </div>
     </header>

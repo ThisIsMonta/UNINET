@@ -1,0 +1,10 @@
+.preview-img{
+    width: 100px;
+    height: 100px;
+    object-fit:scale-down;
+    padding: 10px;
+}
+
+.white{
+    color: white;
+}

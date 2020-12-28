@@ -2,7 +2,7 @@
     <header class="uk-comment-header">
         <div class="uk-grid-medium uk-flex-middle" uk-grid>
             <div class="uk-width-auto">
-                <img class="uk-comment-avatar uk-border-circle" src="//placehold.it/150x150" width="50" height="50"
+                <img class="uk-comment-avatar uk-border-circle" [src]="post.user.profile.photo[0]?userService.host+'/'+post.user.profile.photo[0].filename:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'" width="50" height="50"
                     alt="">
             </div>
             <div class="uk-width-expand">
@@ -24,9 +24,9 @@
                     </a>
                 </h4>
                 <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                    <li><a class="uk-text-muted">{{date(post.createdAt)}}</a></li>
-                    <li><a class="uk-text-primary" *ngIf="!isAdmin" [routerLink]="['./post',post._id]">View Post</a></li>
-                    <li><a class="uk-text-primary" *ngIf="isAdmin" [routerLink]="['../post',post._id]">View Post</a></li>
+                    <li><a class="uk-text-emphasis">{{date(post.createdAt)}}</a></li>
+                    <li *ngIf="!isAdmin"><a class="uk-text-primary"  [routerLink]="['./post',post._id]">View Post</a></li>
+                    <li *ngIf="isAdmin"><a class="uk-text-primary" *ngIf="isAdmin" [routerLink]="['../post',post._id]">View Post</a></li>
                     <li>
                         <button class="uk-button uk-padding-remove upvote" [ngClass]="{'uk-text-primary':upvoted}"
                             (click)="upvote()"><span
@@ -40,9 +40,9 @@
         <p>{{post.content}}</p>
         <div class="">
             <div uk-lightbox>
-                <a *ngFor="let image of post.media" [href]="'http://a29b436625fa.ngrok.io/'+image.filename">
+                <a *ngFor="let image of post.media" [href]="userService.host+'/'+image.filename">
                     <div class="uk-inline-clip uk-transition-toggle" tabindex="0">
-                        <img class="preview-img" [src]="'http://a29b436625fa.ngrok.io/'+image.filename" alt="">
+                        <img class="preview-img" [src]="userService.host+'/'+image.filename" alt="">
                         <div class="uk-position-center white">
                             <span class="uk-transition-fade uk-text-small uk-text-bolder">View <br> image</span>
                         </div>

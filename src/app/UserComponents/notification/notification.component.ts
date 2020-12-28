@@ -7,8 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class NotificationComponent implements OnInit {
 
-  @Input('notification') notification:any
-
+  @Input('notification') notification:any;
   constructor() { }
 
   ngOnInit(): void {

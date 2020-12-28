@@ -9,10 +9,8 @@
 		<div class="uk-navbar-right">
 			<ul class="uk-navbar-nav">
 				<li>
-					<a href="#">
-						<img class="uk-border-circle"
-							[src]="user.profile.photo.length!=0?'http://a29b436625fa.ngrok.io/'+user.profile.photo[0].filename:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'"
-							width="40" height="40">
+					<a class="uk-logo">
+						<img class="uk-border-circle" width="40" height="40" [src]="user.profile.photo.length!=0?userService.host+'/'+user.profile.photo[0].filename:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'">
 					</a>
 					<div class="uk-navbar-dropdown" uk-dropdown="mode: click">
 						<ul class="uk-nav uk-navbar-dropdown-nav">
@@ -50,10 +48,8 @@
 									<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 										<p>Are you sure to log out ?</p>
 										<div class="uk-modal-footer">
-											<button
-												class="uk-button uk-button-primary uk-margin-small-right">NO</button>
-											<button class="uk-button uk-button-secondary uk-modal-close"
-												(click)="authService.signOut()">YES</button>
+											<button class="uk-button uk-button-primary uk-float-right uk-modal-close">NO</button>
+											<button class="uk-button uk-button-secondary uk-float-right uk-modal-close uk-margin-small-right" (click)="authService.signOut()">YES</button>
 										</div>
 									</div>
 								</div>
@@ -92,19 +88,15 @@
 								<p>There is no notifications.</p>
 							</div>
 							<ng-template #elseBlock>
-								<div *ngFor="let n of notification.events">
-									<notification [notification]="n"></notification>
-								</div>
+								<notification *ngFor="let n of notification.events" [notification]="n"></notification>
 							</ng-template>
 						</div>
 					</li>
 				</ul>
 				<ul class="uk-navbar-nav">
 					<li>
-						<a class="uk-navbar-item" href="#">
-							<img class="uk-border-circle"
-							[src]="user.profile.photo.length!=0?'http://a29b436625fa.ngrok.io/'+user.profile.photo[0].filename:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'"
-								width="40" height="40">
+						<a class="">
+							<img class="uk-border-circle profile-image" [src]="user.profile.photo.length!=0?userService.host+'/'+user.profile.photo[0].filename:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'">
 						</a>
 						<div class="uk-navbar-dropdown" uk-dropdown="mode: click">
 							<ul class="uk-nav uk-navbar-dropdown-nav">
@@ -122,10 +114,8 @@
 										<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 											<p>Are you sure to log out ?</p>
 											<div class="uk-modal-footer">
-												<button
-													class="uk-button uk-button-primary uk-margin-small-right">NO</button>
-												<button class="uk-button uk-button-secondary uk-modal-close"
-													(click)="authService.signOut()">YES</button>
+												<button class="uk-button uk-button-primary uk-float-right uk-modal-close">NO</button>
+												<button class="uk-button uk-button-secondary uk-float-right uk-modal-close uk-margin-small-right" (click)="authService.signOut()">YES</button>
 											</div>
 										</div>
 									</div>

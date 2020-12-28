@@ -1,4 +1,4 @@
 <div class="uk-margin">
-    <img src="//placehold.it/150x150" class="uk-border-circle" width="50" >
-    <span class="uk-text-middle uk-margin-small-left">{{user.firstname}} {{user.lastname}}</span>
+    <img [src]="user.profile.photo.length!=0?userService.host+'/'+user.profile.photo[0].filename:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'" width="50" height="50" class="uk-border-circle" width="50" >
+    <a  class="uk-link-heading" [routerLink]="['/home/profile',user._id]"><span class="uk-text-middle uk-margin-small-left">{{user.firstname}} {{user.lastname}}</span></a>
 </div>

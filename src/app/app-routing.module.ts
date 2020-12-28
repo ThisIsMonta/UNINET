@@ -38,6 +38,11 @@ const routes: Routes = [
   ]},
   {path:'admin',component:DashboardComponent,canActivateChild:[AuthGuard],children:[
     {path:'',component:AdminHomeComponent},
+    {path:'group/:id',component:GroupViewComponent,canActivateChild:[GroupGuard],children:[
+      {path:'',component:GroupComponent},
+      {path:'post/:id',component:PostViewComponent}
+    ]},
+    {path:'profile/:id',component:ProfileComponent},
     {path:'feed-posts',component:FeedPostsComponent},
     {path:'post/:id',component:PostViewComponent},
     {path:'approve-accounts',component:ApproveAccountsComponent},

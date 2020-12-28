@@ -20,19 +20,19 @@ export class FeedComponent implements OnInit {
 
   groupList:any = [];
 
-  constructor(private adminService:AdminService,private userService:UserService,public authService:AuthService) {
+  constructor(private adminService:AdminService,public userService:UserService,public authService:AuthService) {
   }
 
  
 
   ngOnInit(): void {
-    // setInterval(()=>{
-      //   this.getGroups();
-      // },500)
     this.user = JSON.parse(sessionStorage.getItem('user'));
     this.notification = this.user.notification;
     console.log(this.notification);
-    this.userService.initSocket();
+    // this.userService.initSocket();
+    this.userService.eventEmit.on("GroupChange",(groups:any)=>{
+      this.groupList = groups;
+    })
     this.connect();
     this.getGroups();
   }
@@ -40,10 +40,10 @@ export class FeedComponent implements OnInit {
   getGroups(){
     if(this.user.role=="Teacher"){
       this.adminService.groups().subscribe((res:any)=>{
-        console.log(res);
+        // console.log(res);
         this.groupList = res.populated;
         sessionStorage.setItem('groups',JSON.stringify(res.raw));
-        console.log(this.groupList);
+        // console.log(this.groupList);
       })
     }else{
       var classId = JSON.parse(sessionStorage.getItem('user')).class._id;
@@ -51,7 +51,7 @@ export class FeedComponent implements OnInit {
         this.groupList = res.populated.groups;
         sessionStorage.setItem('groups',JSON.stringify(res.raw.groups));
         console.log(res);
-        console.log(this.groupList);
+        // console.log(this.groupList);
       });
     }
   }
@@ -59,10 +59,16 @@ export class FeedComponent implements OnInit {
   connect(){
     console.log("trying to connect");
     this.userService.socket.on('connect', () => {
-      console.log("i'm connected"); 
+      this.GetNotifications();
       this.NotificationAlert();
       this.readNotifications();
       this.notificationOpened();
+    });
+  }
+
+  GetNotifications(){
+    this.userService.socket.on('GetNotifications', event => {
+      this.notification = event;
     });
   }
 

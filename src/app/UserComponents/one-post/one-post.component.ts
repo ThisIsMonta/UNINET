@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { UserService } from 'src/app/Services/user.service';
 
+declare var UIkit:any;
+
 @Component({
   selector: 'one-post',
   templateUrl: './one-post.component.html',
@@ -14,25 +16,37 @@ export class OnePostComponent implements OnInit {
   upvoted:boolean = false;
   upvotesCount :number = 0;
   isAdmin : boolean;
-  constructor(private userService:UserService) { }
+  constructor(public userService:UserService) { }
 
   ngOnInit(): void {
     this.isAdmin = JSON.parse(sessionStorage.getItem('user')).role=='Admin';
     if(this.post.user==null){
       this.post = null
     }
-    this.upvoted = this.isUpvoted();
-    this.upvotesCount = this.post.upvotes.length;
+    setTimeout(() => {
+      this.upvoted = this.isUpvoted();
+      this.upvotesCount = this.post.upvotes.length;
+    }, 500);
   }
 
   savePost(){
     this.userService.save(this.post._id).subscribe((res)=>{
       console.log(res);
+    },(e)=>{
+      UIkit.notification({message:e.message,status:'danger'})
+    },()=>{
+      UIkit.notification({message:'Post has been saved',status:'success'})
     })
   }
 
   reportPost(){
-    console.log("post reported");
+    this.userService.report(this.post._id).subscribe((res)=>{
+      console.log(res);
+    },(e)=>{
+      UIkit.notification({message:"An error has occurred",status:'danger'})
+    },()=>{
+      UIkit.notification({message:'Post has been reported',status:'success'})
+    })
   }
 
   date(date:any){

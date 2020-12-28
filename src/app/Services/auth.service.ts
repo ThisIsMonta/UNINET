@@ -43,6 +43,7 @@ export class AuthService {
   signOut(){
     localStorage.removeItem('token');
     sessionStorage.removeItem('user');
+    sessionStorage.removeItem('groups');
     this.currentUser = null;
     this.router.navigate(['login']);
   }
@@ -50,7 +51,7 @@ export class AuthService {
   public isAuthenticated() :boolean{
     this.token = localStorage.getItem('token');
     this.currentUser = sessionStorage.getItem('user');
-    console.log("token is "+this.token);
+    // console.log("token is "+this.token);
     return !!this.token && !!this.currentUser;
   }
 

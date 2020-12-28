@@ -14,7 +14,7 @@ export class GroupPostComponent implements OnInit {
   upvoted:boolean = false;
   upvotesCount :number = 0;
   isAdmin : boolean;
-  constructor(private userService:UserService) { }
+  constructor(public userService:UserService) { }
 
   ngOnInit(): void {
     this.isAdmin = JSON.parse(sessionStorage.getItem('user')).role=='Admin';

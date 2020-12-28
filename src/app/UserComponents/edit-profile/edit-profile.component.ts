@@ -1,9 +1,10 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/Services/user.service';
 
-declare var UIKit:any;
+declare var UIkit:any;
 
 @Component({
   selector: 'app-edit-profile',
@@ -15,24 +16,23 @@ export class EditProfileComponent implements OnInit {
   editProfileForm: FormGroup;
   profileImageURL: any;
   currentUser:any;
-  hasNoImage:boolean;
+  profileImageExists:boolean;
   formData:FormData = new FormData();
   constructor(private router:Router,private userService:UserService,private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.currentUser = JSON.parse(sessionStorage.getItem('user'));
-    this.hasNoImage = this.currentUser.profile.photo?this.currentUser.profile.photo:''
-    this.profileImageURL = this.hasNoImage?this.currentUser.profile.photo:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+    this.profileImageExists = this.currentUser.profile.photo.length!=0?true:false
+    this.profileImageURL = this.profileImageExists?this.userService.host+"/"+this.currentUser.profile.photo[0].filename:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
     this.editProfileForm = this.fb.group({
       firstname: [this.currentUser.firstname],
       lastname: [this.currentUser.lastname],
       profileImage: ['',[
-
       ]],
-      dateOfBirth: [''],
+      dateOfBirth: [this.currentUser.profile.dn?formatDate(this.currentUser.profile.dn, 'yyyy-MM-dd','en'):''],
       bio: ['']
     })
-    this.editProfileForm.valueChanges.subscribe(console.log);
+    this.editProfileForm.valueChanges.subscribe(console.log);    
   }
 
   editProfile(){
@@ -49,17 +49,18 @@ export class EditProfileComponent implements OnInit {
       this.userService.editProfile(this.formData).subscribe((res:any)=>{
         console.log(res);
         sessionStorage.setItem('user',JSON.stringify(res));
+      },(e)=>{
+        console.log(e);
+        UIkit.notification({message:'an error has occured',status:'danger',timeout:'1000'});
       },()=>{
-        UIKit.notification({message:'an error has occured',status:'danger',timeout:'1000'});
-      },()=>{
-        this.router.navigate(['/home/profile']);
+        this.router.navigate(['home/profile',this.currentUser._id]);
       })
     }
   }
 
   removeProfileImage() {
     this.profileImageURL = null;
-    this.hasNoImage = true;
+    this.profileImageExists = false;
     console.log("removed");
   }
 
@@ -72,12 +73,8 @@ export class EditProfileComponent implements OnInit {
       reader.onload = (event: any) => {
         console.log(event.target.result);
         this.profileImageURL = event.target.result;
-
-        // this.editProfileForm.patchValue({
-        //   profileImage: this.profileImageURL
-        // });
       }
-      this.hasNoImage = false;
+      this.profileImageExists = false;
       reader.readAsDataURL(event.target.files[0]);
     }
   }

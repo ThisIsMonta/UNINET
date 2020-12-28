@@ -51,6 +51,9 @@ export class ApproveAccountsComponent implements OnInit {
     }else{
       this.http.sendPostRequest(`/user/${id}/activate`,this.approveForm.value).subscribe((res)=>{
         console.log(res);
+      },()=>{},()=>{
+        this.approveForm.reset();
+        this.gettingPendingUsers();
       })
     }
   }
