@@ -1,11 +1,12 @@
 {
     "/api": {
-      "target": "http://a29b436625fa.ngrok.io",
+      "target": "http://localhost:3000",
       "secure": false,
       "changeOrigin": true,
       "pathRewrite": {
         "^/api": ""
       }
+      
       
     }
   }

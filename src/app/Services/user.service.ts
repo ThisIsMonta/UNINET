@@ -8,7 +8,7 @@ import { EventEmitter } from 'events';
 })
 export class UserService {
   public socket: any;
-  public host = "http://a29b436625fa.ngrok.io";
+  public host = "http://localhost:3000";
 
   public eventEmit = new EventEmitter();
 
