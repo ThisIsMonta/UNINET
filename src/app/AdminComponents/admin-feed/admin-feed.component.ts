@@ -15,9 +15,7 @@ export class AdminFeedComponent implements OnInit {
   ngOnInit(): void {
     this.user = JSON.parse(sessionStorage.getItem('user'));
     this.adminService.getAdminPosts().subscribe((res:any)=>{
-      this.adminPosts = res.feed.posts;
-      console.log(res);
-      
+      this.adminPosts = res.feed.posts;      
     })
   }
 

@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
-import { HttpService } from 'src/app/Services/http.service';
 import { UserService } from 'src/app/Services/user.service';
+
+declare var UIkit:any;
 
 @Component({
   selector: 'admin-post',
@@ -18,24 +19,33 @@ export class AdminPostComponent implements OnInit {
   upvoted: boolean;
   saved: boolean = false;
   isDeleted : boolean = false;
+  user:any;
   constructor(public userService:UserService) { }
 
   ngOnInit(): void {
+    console.log(this.post);
     this.upvotesCount = this.post.upvotes.length;
-    this.isAdmin = JSON.parse(sessionStorage.getItem('user')).role=="Admin";
+    this.user = JSON.parse(sessionStorage.getItem('user'));
+    this.isAdmin = this.user.role=="Admin";
     this.upvoted = this.isUpvoted();
+    this.saved = this.isSaved();
   }
 
   savePost(){
-    console.log("post saved!");
-    this.saved = !this.saved;
+    this.userService.save(this.post._id).subscribe((res)=>{
+      console.log(res);
+    },()=>{},()=>{
+      this.saved = true;
+    })
   }
 
   deletePost(id){
-    console.log("post deleted");
     this.userService.deletePost(id).subscribe((res)=>{
-      console.log(res);
       this.isDeleted = true;
+    },(e)=>{
+      UIkit.notification({message: e.message});
+    },()=>{
+      UIkit.notification({message: `Post has been deleted`,status:'success'});
     });
   }
 
@@ -43,12 +53,10 @@ export class AdminPostComponent implements OnInit {
     if(this.upvoted){
       this.userService.downvote(this.post._id).subscribe((res:any)=>{
         this.upvotesCount = res.upvotes.length;
-        console.log(res);
       })
     }else{
       this.userService.upvote(this.post._id).subscribe((res:any)=>{
         this.upvotesCount = res.upvotes.length;
-        console.log(res);
       })
     }
     this.upvoted = !this.upvoted;
@@ -60,6 +68,10 @@ export class AdminPostComponent implements OnInit {
 
   isUpvoted(){
     return this.post.upvotes.includes(JSON.parse(sessionStorage.getItem('user')).userId);
+  }
+
+  isSaved(){
+    return this.user.saves.includes(this.post._id)
   }
 
 }

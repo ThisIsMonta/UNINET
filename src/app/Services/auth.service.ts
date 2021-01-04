@@ -51,7 +51,6 @@ export class AuthService {
   public isAuthenticated() :boolean{
     this.token = localStorage.getItem('token');
     this.currentUser = sessionStorage.getItem('user');
-    // console.log("token is "+this.token);
     return !!this.token && !!this.currentUser;
   }
 

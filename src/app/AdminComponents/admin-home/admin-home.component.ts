@@ -37,14 +37,10 @@ export class AdminHomeComponent implements OnInit {
 
   addPost() {
     this.posting = true;
-    console.log(this.postForm.value);
     if (this.postForm.invalid) {
-      console.log("verify your form");
     } else {
       this.formData.append("content",this.postForm.get('content').value);
-      console.log(this.formData);
       this.adminService.post(this.formData).subscribe((res) => {
-        console.log(res);
         this.posting = false;
         this.files = [];
         this.postForm.reset();
@@ -56,7 +52,6 @@ export class AdminHomeComponent implements OnInit {
 
   uploadImages(event) {
     if (event.target.files && event.target.files[0]) {
-      console.log(event.target.files);
       var filesAmount = event.target.files.length;
       for (let i = 0; i < filesAmount; i++) {
         var reader = new FileReader();
@@ -76,7 +71,6 @@ export class AdminHomeComponent implements OnInit {
   getPosts(){
     this.adminService.getAdminPosts().subscribe((res:any)=>{
       this.adminPosts = res.feed.posts;
-      console.log(this.adminPosts)
       this.loaded = true;
     })
   }

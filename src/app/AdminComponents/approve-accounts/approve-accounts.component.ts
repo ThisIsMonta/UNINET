@@ -35,7 +35,6 @@ export class ApproveAccountsComponent implements OnInit {
     },()=>{},()=>{
       this.loading = false;
     });
-    this.approveForm.valueChanges.subscribe(console.log);
   }
 
   isStudent(value){
@@ -50,8 +49,9 @@ export class ApproveAccountsComponent implements OnInit {
       UIkit.notification({message: "Verify your form please.",status:'danger'});
     }else{
       this.http.sendPostRequest(`/user/${id}/activate`,this.approveForm.value).subscribe((res)=>{
-        console.log(res);
-      },()=>{},()=>{
+      },(e)=>{
+        UIkit.notification({message: e.message,status:'danger'});
+      },()=>{
         this.approveForm.reset();
         this.gettingPendingUsers();
       })
@@ -60,8 +60,11 @@ export class ApproveAccountsComponent implements OnInit {
 
   rejectUser(id){
     this.adminService.removeUser(id).subscribe((res)=>{
-      console.log(res);
       this.gettingPendingUsers();
+    },(e)=>{
+      UIkit.notification({message: e.message,status:'danger'});
+    },()=>{
+      UIkit.notification({message: `User rejected`,status:'danger'});
     })
   }
 

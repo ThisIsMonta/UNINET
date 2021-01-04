@@ -25,7 +25,6 @@ export class PostViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params)=>{
-      console.log(params);
       // this.userService.initSocket();
       this.userService.socket.emit('JoinPost',{id:params.id});
       this.userService.getPost(params.id).subscribe((res)=>{
@@ -34,8 +33,6 @@ export class PostViewComponent implements OnInit {
         this.isAdmin = JSON.parse(sessionStorage.getItem('user')).role=="Admin";
         this.upvoted = this.isUpvoted();
         this.comments = this.post.comments;
-        console.log("comments are ",this.comments);
-        console.log(this.post);
         this.loaded = true;
       })
     })
@@ -43,7 +40,6 @@ export class PostViewComponent implements OnInit {
         this.post = res;
         this.upvotesCount = res.upvotes.length;
         this.comments = res.comments;
-        console.log(this.comments);
     });
     this.commentForm = this.fb.group({
       comment:['',[Validators.required]]
@@ -56,15 +52,12 @@ export class PostViewComponent implements OnInit {
       UIkit.notification({message:'Write something to comment',status:'primary',timeout:'500'});
     }else{
       this.userService.comment(this.post._id,this.commentForm.value).subscribe((res)=>{
-        console.log("commented");
-        console.log(res);
         this.commentForm.reset();
       });
     }
   }
 
   savePost(){
-    console.log("post saved!");
     this.saved = !this.saved;
   }
 
@@ -72,12 +65,10 @@ export class PostViewComponent implements OnInit {
     if(this.upvoted){
       this.userService.downvote(this.post._id).subscribe((res:any)=>{
         this.upvotesCount = res.upvotes.length;
-        console.log(res);
       })
     }else{
       this.userService.upvote(this.post._id).subscribe((res:any)=>{
         this.upvotesCount = res.upvotes.length;
-        console.log(res);
       })
     }
     this.upvoted = !this.upvoted;

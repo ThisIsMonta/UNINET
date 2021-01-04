@@ -29,17 +29,15 @@ export class AddGroupComponent implements OnInit {
         [Validators.required]
       ]
     });
-    this.newGroupForm.valueChanges.subscribe(console.log)
   }
 
   addGroup(){
     this.newGroupForm.markAllAsTouched();
     if(this.newGroupForm.invalid){
-      console.log("invalid");
+      UIkit.notification({message: `Form invalid`,status:'warning'});
     }else{
       var classname = this.newGroupForm.get('name').value;
       this.http.sendPostRequest("/group",this.newGroupForm.value).subscribe((r)=>{
-        console.log(r);
       },()=>{},()=>{
         this.newGroupForm.reset();
         this.getClasses();
@@ -52,7 +50,6 @@ export class AddGroupComponent implements OnInit {
   getClasses(){
     this.adminService.classes().subscribe((classes:any)=>{
       this.classesList = classes;
-      console.log(this.classesList);
     });
   }
 
@@ -61,7 +58,6 @@ export class AddGroupComponent implements OnInit {
     this.adminService.groups().subscribe((groups:any)=>{
       this.groupList = groups.populated;
       this.userService.eventEmit.emit("GroupChange",this.groupList)
-      console.log(this.groupList);
     },()=>{},()=>{
       this.loading = false;
     });
@@ -69,7 +65,6 @@ export class AddGroupComponent implements OnInit {
 
   deleteGroup(id,groupname){
     this.http.sendDeleteRequest(`/group/${id}`).subscribe((r)=>{
-      console.log(r);
       UIkit.notification({message: `Group ${groupname} has been deleted`,status:'success'});
       this.getClasses();
       this.getGroups();

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from 'src/app/Services/admin.service';
 import { HttpService } from 'src/app/Services/http.service';
 
+declare var UIkit:any;
+
 @Component({
   selector: 'app-add-class',
   templateUrl: './add-class.component.html',
@@ -24,19 +26,17 @@ export class AddClassComponent implements OnInit {
         [Validators.required]
       ]
     });
-    this.newClassForm.valueChanges.subscribe(console.log)
   }
 
   addClass(){
     this.newClassForm.markAllAsTouched();
     if(this.newClassForm.invalid){
-      console.log("unvalid");
+      UIkit.notification({message: `Form invalid`,status:'warning',timeout:'500'});
     }else{
       var classname = this.newClassForm.get('name').value;
       this.http.sendPostRequest("/rang",this.newClassForm.value).subscribe((r)=>{
-        console.log(r);
         this.getClasses();
-        // UIkit.notification({message: `Class ${classname} has been created`});
+        UIkit.notification({message: `Class ${classname} has been created`});
       })
       this.newClassForm.reset();
     }
@@ -45,14 +45,12 @@ export class AddClassComponent implements OnInit {
   getClasses(){
     this.adminService.classes().subscribe((classes:any)=>{
       this.classesList = classes;
-      console.log(this.classesList);
     });
   }
 
   deleteClass(id,classname){
     this.http.sendDeleteRequest(`/rang/${id}`).subscribe((r)=>{
-      console.log(r);
-      // UIkit.notification({message: `Class ${classname} has been deleted`});
+      UIkit.notification({message: `Class ${classname} has been deleted`});
       this.getClasses();
     })
   }

@@ -36,12 +36,11 @@ export class FeedPostsComponent implements OnInit {
     this.userService.getTimeline().subscribe((res)=>{
       this.posts = res;
       this.loading = false;
-      // console.log(res);
+    
     })
     if(this.user.role!='Admin'){
       this.userService.getSavedPosts().subscribe((res:any)=>{
         this.savedPosts = res.saved;
-        console.log("saved ",res);
       })
     }
     
@@ -49,14 +48,10 @@ export class FeedPostsComponent implements OnInit {
 
   addPost() {
     this.posting = true;
-    console.log(this.postForm.value);
     if (this.postForm.invalid) {
-      console.log("verify your form");
     } else {
       this.formData.append("content",this.postForm.get('content').value);
-      console.log(this.formData);
       this.userService.post(this.formData).subscribe((res) => {
-        console.log(res);
         this.posting = false;
         this.files = [];
         this.postForm.reset();
@@ -67,7 +62,6 @@ export class FeedPostsComponent implements OnInit {
 
   uploadImages(event) {
     if (event.target.files && event.target.files[0]) {
-      console.log(event.target.files);
       var filesAmount = event.target.files.length;
       for (let i = 0; i < filesAmount; i++) {
         var reader = new FileReader();

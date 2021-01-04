@@ -20,7 +20,6 @@ export class DeleteAccountsComponent implements OnInit {
   getAllUsers(){
     this.http.sendGetRequest("/user").subscribe((res)=>{
       this.allUsers = res;
-      console.log(res);
     },()=>{},()=>{
       this.loading = false
     })
@@ -28,7 +27,6 @@ export class DeleteAccountsComponent implements OnInit {
 
   deleteUser(id){
     this.adminService.removeUser(id).subscribe((res)=>{
-      console.log(res);
       this.getAllUsers();
     })
   }

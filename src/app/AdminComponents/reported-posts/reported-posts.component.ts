@@ -29,7 +29,6 @@ export class ReportedPostsComponent implements OnInit {
 
   removePost(id){
     this.userService.deletePost(id).subscribe((res)=>{
-      console.log(res);
     },()=>{},()=>{
       UIkit.notification({message:'Post has been removed',status:'warning',timeout:'500'})
       this.getReportedPost();
@@ -38,7 +37,6 @@ export class ReportedPostsComponent implements OnInit {
 
   ignorePost(id){
     this.adminService.ignoreReportedPost(id).subscribe((res:any)=>{
-      console.log(res);
       this.reportedPosts = res.posts;
     },()=>{},()=>{
       UIkit.notification({message:'Ignored',status:'danger',timeout:'500'})

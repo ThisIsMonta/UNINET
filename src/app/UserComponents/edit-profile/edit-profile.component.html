@@ -12,7 +12,7 @@
                                 <h5>Drag and drop your image here,</h5>
                                 <label for="fileDropRef">Browse your files</label>
                             </div>
-                            <a *ngIf="profileImageExists" class="uk-margin-small-top uk-text-center" (click)="removeProfileImage()" uk-tooltip="Remove this image." uk-icon="close"></a>
+                            <a *ngIf="profileImageExists" class="uk-margin-small-top uk-text-center" (click)="removeProfileImage()" uk-tooltip="Remove this image" uk-icon="close"></a>
                         </div>
                         <div class="uk-width-expand@m">
                             <div class="">
@@ -44,6 +44,9 @@
                     </div>
                     <button class="uk-button uk-button-primary uk-float-right" type="submit">edit</button>
                 </form>
+                <div *ngIf="editing" class="uk-overlay-default uk-position-cover">
+                    <div class="uk-position-center" uk-spinner></div>
+                </div>
             </div>
             <div class="uk-card-footer">
                 <h3>Groups</h3>

@@ -21,6 +21,9 @@
                                 <li>
                                     <a (click)="reportPost()"><span class="uk-margin-small-right" uk-icon="warning"></span>Report</a>
                                 </li>
+                                <li *ngIf="isMine">
+                                    <a (click)="deletePost()"><span class="uk-margin-small-right" uk-icon="trash"></span>Delete</a>
+                                </li>
                             </ul>
                         </div>
                     </a>

@@ -9,7 +9,7 @@
                 <h4 class="uk-comment-title uk-margin-remove">
                     <a class="uk-link-reset" [routerLink]="['/home/profile',post.user._id]">{{post.user.firstname}}
                         {{post.user.lastname}}</a>
-                    <a class="uk-link-reset uk-float-right">
+                    <a *ngIf="!isAdmin" class="uk-link-reset uk-float-right">
                         <a href="#" class="uk-icon-link uk-margin-small-right" uk-icon="more-vertical"></a>
                         <div uk-dropdown="mode:click">
                             <ul class="uk-nav uk-dropdown-nav">

@@ -21,9 +21,7 @@ export class CommentComponent implements OnInit {
   }
 
   deleteComment(postId,id){
-    console.log("deleted");
     this.userService.deleteComment(postId,id).subscribe((res)=>{
-      console.log(res);
     })
   }
 

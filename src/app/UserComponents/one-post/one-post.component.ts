@@ -16,9 +16,11 @@ export class OnePostComponent implements OnInit {
   upvoted:boolean = false;
   upvotesCount :number = 0;
   isAdmin : boolean;
+  isMine:boolean;
   constructor(public userService:UserService) { }
 
   ngOnInit(): void {
+    this.isMine = this.userService.isMine(this.post.user._id)
     this.isAdmin = JSON.parse(sessionStorage.getItem('user')).role=='Admin';
     if(this.post.user==null){
       this.post = null
@@ -31,7 +33,6 @@ export class OnePostComponent implements OnInit {
 
   savePost(){
     this.userService.save(this.post._id).subscribe((res)=>{
-      console.log(res);
     },(e)=>{
       UIkit.notification({message:e.message,status:'danger'})
     },()=>{
@@ -39,9 +40,12 @@ export class OnePostComponent implements OnInit {
     })
   }
 
+  deletePost(){
+    console.log("post deleted");
+  }
+
   reportPost(){
     this.userService.report(this.post._id).subscribe((res)=>{
-      console.log(res);
     },(e)=>{
       UIkit.notification({message:"An error has occurred",status:'danger'})
     },()=>{
@@ -57,12 +61,10 @@ export class OnePostComponent implements OnInit {
     if(this.upvoted){
       this.userService.downvote(this.post._id).subscribe((res:any)=>{
         this.upvotesCount = res.upvotes.length;
-        console.log(res);
       })
     }else{
       this.userService.upvote(this.post._id).subscribe((res:any)=>{
         this.upvotesCount = res.upvotes.length;
-        console.log(res);
       })
     }
     this.upvoted = !this.upvoted;

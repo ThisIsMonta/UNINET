@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { UserService } from 'src/app/Services/user.service';
 
+declare var UIkit:any;
+
 @Component({
   selector: 'group-post',
   templateUrl: './group-post.component.html',
@@ -27,12 +29,16 @@ export class GroupPostComponent implements OnInit {
 
   savePost(){
     this.userService.save(this.post._id).subscribe((res)=>{
-      console.log(res);
     })
   }
 
   reportPost(){
-    console.log("post reported");
+    this.userService.report(this.post._id).subscribe((res)=>{
+    },(e)=>{
+      UIkit.notification({message:"An error has occurred",status:'danger'})
+    },()=>{
+      UIkit.notification({message:'Post has been reported',status:'success'})
+    })
   }
 
   date(date:any){
@@ -43,12 +49,10 @@ export class GroupPostComponent implements OnInit {
     if(this.upvoted){
       this.userService.downvote(this.post._id).subscribe((res:any)=>{
         this.upvotesCount = res.upvotes.length;
-        console.log(res);
       })
     }else{
       this.userService.upvote(this.post._id).subscribe((res:any)=>{
         this.upvotesCount = res.upvotes.length;
-        console.log(res);
       })
     }
     this.upvoted = !this.upvoted;

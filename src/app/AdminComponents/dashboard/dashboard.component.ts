@@ -16,7 +16,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.adminService.allGroups().subscribe((res)=>{
       this.groupList = res;
-      console.log(res);
     })
   }
 

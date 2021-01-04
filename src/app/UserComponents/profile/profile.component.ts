@@ -29,21 +29,16 @@ export class ProfileComponent implements OnInit {
 
   constructor(private route:ActivatedRoute,private fb:FormBuilder,public adminService:AdminService,public userService:UserService) {
     this.route.params.subscribe((params)=>{
-      console.log(params);
       this.userService.getProfile(params.id).subscribe((res:any)=>{
         this.user = res;
         this.profileIsMine = this.userService.isMine(this.user._id)
-        console.log(this.profileIsMine);
-        console.log(res);
         if (this.user.role=="Teacher") {
           this.adminService.groups().subscribe((res:any)=>{
             this.groups = res.populated;
-            console.log(res.populated);
           })
         }else{
           this.adminService.getClass(this.user.class._id).subscribe((res:any)=>{
             this.groups = res.populated.groups;
-            console.log(res.populated);
           })
         }
       },()=>{},()=>{
@@ -64,14 +59,10 @@ export class ProfileComponent implements OnInit {
 
   addPost() {
     this.posting = true;
-    console.log(this.postForm.value);
     if (this.postForm.invalid) {
-      console.log("verify your form");
     } else {
       this.formData.append("content",this.postForm.get('content').value);
-      console.log(this.formData);
       this.userService.post(this.formData).subscribe((res) => {
-        console.log(res);
         this.posting = false;
         this.files = [];
         this.postForm.reset();
@@ -82,7 +73,6 @@ export class ProfileComponent implements OnInit {
 
   uploadImages(event) {
     if (event.target.files && event.target.files[0]) {
-      console.log(event.target.files);
       var filesAmount = event.target.files.length;
       for (let i = 0; i < filesAmount; i++) {
         var reader = new FileReader();

@@ -13,8 +13,13 @@ export class GroupGuard implements CanActivate, CanActivateChild {
     return true;
   }
   canActivateChild(route: ActivatedRouteSnapshot): boolean {
-    console.log("guard says",route.params.id);
-    if(JSON.parse(sessionStorage.getItem('groups')).includes(route.params.id) || JSON.parse(sessionStorage.getItem('user')).role=="Admin"){
+    var groups = JSON.parse(sessionStorage.getItem('groups'));
+    var user = JSON.parse(sessionStorage.getItem('user'));
+    if(groups!=null){
+      if(groups.includes(route.params.id)){
+        return true;
+      }
+    }else if(user.role=="Admin"){
       return true;
     }
     this.router.navigate(['/login'])

@@ -19,7 +19,7 @@
                             </div>
                         </span></h4>
                     <div class="uk-margin">
-                        <button class="uk-button uk-float-right" type="submit">Add class</button>
+                        <button class="uk-button uk-float-right uk-button-primary" type="submit">Add class</button>
                     </div>
                 </div>
             </form>
@@ -31,7 +31,7 @@
                 <ul *ngIf="classesList.length!=0;else noClasses" uk-accordion="multiple: true">
                     <li *ngFor="let class of classesList;let i=index;">
                         <a class="uk-accordion-title"><span class="uk-margin-small-right"
-                                (click)="deleteClass(class._id,class.name)" uk-icon="close"></span>{{class.name}}</a>
+                                (click)="deleteClass(class._id,class.name)" uk-tooltip="title: Delete class; pos: top" uk-icon="close"></span>{{class.name}}</a>
                         <div class="uk-accordion-content">
                             <group-user *ngFor="let student of class.students" [user]="student"></group-user>
                         </div>
