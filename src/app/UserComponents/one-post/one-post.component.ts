@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import * as moment from 'moment';
 import { UserService } from 'src/app/Services/user.service';
 
@@ -12,6 +12,7 @@ declare var UIkit:any;
 export class OnePostComponent implements OnInit {
 
   @Input('post') post:any;
+  @Output() postDeleted = new EventEmitter();
   loading:boolean = true;
   upvoted:boolean = false;
   upvotesCount :number = 0;
@@ -41,7 +42,14 @@ export class OnePostComponent implements OnInit {
   }
 
   deletePost(){
-    console.log("post deleted");
+    UIkit.notification({message:'Deleting post',status:'warning',timeout:'250'})
+    this.userService.deletePost(this.post._id).subscribe((res)=>{
+    },(e)=>{
+      UIkit.notification({message:e.message,status:'danger'})
+    },()=>{
+      UIkit.notification({message:'Post has been deleted',status:'danger'})
+      this.postDeleted.emit();
+    })
   }
 
   reportPost(){

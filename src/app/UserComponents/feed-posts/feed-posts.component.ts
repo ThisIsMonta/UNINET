@@ -36,7 +36,6 @@ export class FeedPostsComponent implements OnInit {
     this.userService.getTimeline().subscribe((res)=>{
       this.posts = res;
       this.loading = false;
-    
     })
     if(this.user.role!='Admin'){
       this.userService.getSavedPosts().subscribe((res:any)=>{
@@ -55,7 +54,7 @@ export class FeedPostsComponent implements OnInit {
         this.posting = false;
         this.files = [];
         this.postForm.reset();
-        // this.getPosts();
+        this.getPosts();
       })
     }
   }
@@ -74,6 +73,12 @@ export class FeedPostsComponent implements OnInit {
         reader.readAsDataURL(event.target.files[i]);
       }
     }
+  }
+
+  getPosts(){
+    this.userService.getTimeline().subscribe((res)=>{
+      this.posts = res;
+    })
   }
 
 }

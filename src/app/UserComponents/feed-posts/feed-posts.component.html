@@ -14,7 +14,7 @@
             </div>
             <div *ngIf="posts.feed.length!=0">
                 <div *ngFor="let post of posts.feed.posts">
-                    <one-post [post]="post"></one-post>
+                    <one-post (postDeleted)="getPosts()" [post]="post"></one-post>
                 </div>
             </div>
         </div>
